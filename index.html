@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Wolf Room | Online Werewolf</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">W</span><span>WOLF <b>ROOM</b><small>ONLINE WEREWOLF</small></span></a>
+      <span class="online"><i></i> ONLINE GAME</span>
+    </header>
+
+    <section id="welcome" class="panel welcome">
+      <div class="eyebrow">SOCIAL DEDUCTION GAME</div>
+      <h1>誰が嘘をついている？</h1>
+      <p class="muted">ルームを作成するか、友達のルームに参加しよう。</p>
+      <label>プレイヤー名<input id="playerName" maxlength="12" placeholder="名前を入力" autocomplete="nickname"></label>
+      <div class="actions">
+        <button id="createBtn" class="primary">ルームを作成</button>
+      </div>
+      <div class="split"><span>または参加する</span></div>
+      <label>ルームコード<input id="roomCode" maxlength="6" placeholder="例：A1B2C3" autocapitalize="characters"></label>
+      <button id="joinBtn" class="secondary">ルームに参加</button>
+      <p id="welcomeError" class="error" role="alert"></p>
+    </section>
+
+    <section id="game" class="hidden">
+      <div class="room-heading panel">
+        <div><div class="eyebrow">ROOM CODE</div><div id="roomCodeLabel" class="room-code">------</div></div>
+        <button id="copyCodeBtn" class="small secondary">コードをコピー</button>
+      </div>
+
+      <div class="grid">
+        <section class="panel">
+          <div class="section-head"><h2>プレイヤー</h2><span id="playerCount" class="count">0 人</span></div>
+          <ul id="players" class="players"></ul>
+          <div id="hostControls" class="host-controls hidden">
+            <div class="section-head"><h2>役職設定</h2><span class="muted tiny">人数に合わせて設定</span></div>
+            <div id="roleSettings" class="role-settings"></div>
+            <p class="muted tiny">設定した役職以外の人数は市民になります。役職合計は参加人数以下にしてください。</p>
+            <button id="startBtn" class="primary full">ゲーム開始</button>
+          </div>
+        </section>
+
+        <section class="panel game-panel">
+          <div class="section-head"><h2 id="phaseTitle">待機中</h2><span id="roundLabel" class="count">LOBBY</span></div>
+          <div id="notice" class="notice">ルームに友達を招待しよう。</div>
+          <div id="privateRole" class="private-role hidden">
+            <div class="eyebrow">YOUR ROLE</div><div id="roleName" class="role-name"></div><p id="roleDescription"></p>
+          </div>
+          <div id="actionArea" class="action-area hidden">
+            <label id="targetLabel" for="targetSelect">対象プレイヤー</label>
+            <select id="targetSelect"></select>
+            <button id="actionBtn" class="primary full">行動する</button>
+          </div>
+          <div id="result" class="result hidden" role="status"></div>
+          <p id="gameError" class="error" role="alert"></p>
+        </section>
+      </div>
+      <button id="leaveBtn" class="text-button">画面を離れる</button>
+    </section>
+    <footer>WOLF ROOM <span>•</span> PLAY FAIR, THINK DEEP</footer>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
